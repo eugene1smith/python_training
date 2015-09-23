@@ -52,7 +52,7 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(Contact.nickname)
 
-    def company(self, wd, company):
+    """def company(self, wd, company):
         # title
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("title").click()
@@ -135,7 +135,15 @@ class test_add_contact(unittest.TestCase):
         # notes
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
-        wd.find_element_by_name("notes").send_keys(notes)
+        wd.find_element_by_name("notes").send_keys(notes)"""
+
+
+
+    def return_to_the_home_page(self, wd):
+        wd.find_element_by_link_text("home page").click()
+
+    def logout(self, wd):
+        wd.find_element_by_link_text("Logout").click()
 
     def test_add_contact(self):
         wd = self.wd
@@ -143,20 +151,14 @@ class test_add_contact(unittest.TestCase):
         self.login(wd)
         self.init_contact_creation(wd)
         self.contact(wd, Contact(first_name="Eugene", last_name="Kuznetsov", nickname="eugene_smith"))
-        self.company(wd, Contact.company(title="LLC", company_name="Lazada", address="Moscow, Presnenskaya, 10"))
+        """self.company(wd, Contact.company(title="LLC", company_name="Lazada", address="Moscow, Presnenskaya, 10"))
         self.phones(wd, "84951112233", "89001112233", "80001122333", "88003332211")
         self.web_info(wd, "eugene.kuznetsov@lazada.com", "second@lazada.com", "third@lazada.com", "www.homepage.com")
         self.dates(wd, "1980", "1990")
-        self.other_info(wd, "Second address", "My home address", "Some note for this test")
+        self.other_info(wd, "Second address", "My home address", "Some note for this test")"""
         self.submit_contact_creation(wd)
         self.return_to_the_home_page(wd)
         self.logout(wd)
-
-    def return_to_the_home_page(self, wd):
-        wd.find_element_by_link_text("home page").click()
-
-    def logout(self, wd):
-        wd.find_element_by_link_text("Logout").click()
 
     def tearDown(self):
         self.wd.quit()
