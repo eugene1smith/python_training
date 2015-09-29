@@ -3,14 +3,10 @@ __author__ = 'Eugene'
 
 class Contact:
 
-    def __init__(self, first_name, last_name, nickname):
+    def contact(self, first_name, last_name, nickname):
         self.first_name = first_name
         self.last_name = last_name
         self.nickname = nickname
-        self.company = None
-
-    """???contact = Contact()
-    contact.company=()???
 
     def company(self, title, company_name, address):
         self.title = title
@@ -36,5 +32,4 @@ class Contact:
     def other_info(self, second_address, home_address, notes):
         self.second_address = second_address
         self.home_address = home_address
-        self.notes = notes"""
-
+        self.notes = notes

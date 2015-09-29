@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
 import unittest
-from contact import Contact
+from contact import *
 
 def is_alert_present(wd):
     try:
@@ -16,6 +16,7 @@ class test_add_contact(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
+        self.x = Contact()
     
     def open_home_page(self, wd):
         wd.get("http://localhost/addressbook/")
@@ -36,23 +37,23 @@ class test_add_contact(unittest.TestCase):
     def init_contact_creation(self, wd):
         wd.find_element_by_link_text("add new").click()
 
-    def contact(self, wd, Contact):
-        # first name
+    def contact(self, wd, contact):
+        self.x = Contact()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(Contact.first_name)
+        wd.find_element_by_name("firstname").send_keys(contact.first_name)
         # last name
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(Contact.last_name)
+        wd.find_element_by_name("lastname").send_keys(contact.last_name)
         # nickname
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(Contact.nickname)
+        wd.find_element_by_name("nickname").send_keys(contact.nickname)
 
-    """def company(self, wd, company):
+    def company(self, wd, company):
         # title
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("title").click()
@@ -135,7 +136,7 @@ class test_add_contact(unittest.TestCase):
         # notes
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
-        wd.find_element_by_name("notes").send_keys(notes)"""
+        wd.find_element_by_name("notes").send_keys(notes)
 
 
 
@@ -150,12 +151,12 @@ class test_add_contact(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd)
         self.init_contact_creation(wd)
-        self.contact(wd, Contact(first_name="Eugene", last_name="Kuznetsov", nickname="eugene_smith"))
-        """self.company(wd, Contact.company(title="LLC", company_name="Lazada", address="Moscow, Presnenskaya, 10"))
+        self.x.contact(wd, contact(first_name="Eugene", last_name="Kuznetsov", nickname="eugene_smith"))
+        self.x.company(wd, company(title="LLC", company_name="Lazada", address="Moscow, Presnenskaya, 10"))
         self.phones(wd, "84951112233", "89001112233", "80001122333", "88003332211")
         self.web_info(wd, "eugene.kuznetsov@lazada.com", "second@lazada.com", "third@lazada.com", "www.homepage.com")
         self.dates(wd, "1980", "1990")
-        self.other_info(wd, "Second address", "My home address", "Some note for this test")"""
+        self.other_info(wd, "Second address", "My home address", "Some note for this test")
         self.submit_contact_creation(wd)
         self.return_to_the_home_page(wd)
         self.logout(wd)
