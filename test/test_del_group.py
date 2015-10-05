@@ -1,7 +1,9 @@
 __author__ = 'Eugene'
 
 
+from model.group import group
+
 def test_delete_first_group(app):
-    app.session.login(username="admin", password="secret")
+    if app.group.count() == 0:
+        app.group.create(group(name = 'test'))
     app.group.delete_first_group()
-    app.session.logout()
