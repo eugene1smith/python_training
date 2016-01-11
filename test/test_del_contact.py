@@ -4,7 +4,7 @@ from model.contact import Contact
 
 
 def test_delete_contact(app):
-    old_contacts = app.contact.get_contact.list()
+    old_contacts = app.contact.get_contact_list()
     contact = Contact(first_name="Eugene", last_name="Kuznetsov", nickname="eugene_smith",
                                     title="LLC", company_name="Lazada", address="Moscow, Presnenskaya, 10",
                                     home="84951112233", mobile="89001112233", work="80001122333", fax="88003332211",
