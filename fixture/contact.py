@@ -105,16 +105,28 @@ class ContactHelper:
         self.submit_contact_creation()
         self.contact_cache = None
 
-    def delete_contact(self):
+    def select_first_contact(self):
         wd = self.contact.wd
         wd.find_element_by_name("selected[]").click()
+
+    def select_contact_by_index(self, index):
+        wd = self.contact.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
+    def delete_contact_by_index(self, index):
+        wd = self.contact.wd
+        self.select_contact_by_index(index)
         wd.find_element_by_xpath(".//*[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
-    def modify_contact(self, Contact):
+    def modify_first_contact(self, index):
+        self.modify_contact_by_index(0)
+
+    def modify_contact_by_index(self, index, Contact=None):
         wd = self.contact.wd
         # init contact modification
+        self.select_contact_by_index(index)
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         # first name
